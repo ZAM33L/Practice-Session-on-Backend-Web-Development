@@ -1,1 +1,18 @@
+Task 6: Database Integration and
+User Authentication
 
+Objective: Integrate a database and
+implement user authentication for secure
+data handling.
+
+Steps:
+
+Integrate a database (e.g., MongoDB,
+MySQL) for storing and retrieving form
+data.
+
+Implement user authentication on the
+server.
+
+Secure your API endpoints by adding
+authorization checks.
