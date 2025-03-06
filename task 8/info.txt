@@ -1,1 +1,18 @@
+Task 8 Advanced Server-Side Where Data Meets Intelligence
+Functionality
+
+Objective: Implement advanced server-side
+features for a robust application.
+
+Steps:
+
+Introduce middleware for request processing
+(e.g., body parsing, logging).
+
+Implement background tasks or job
+processing using tools like Redis or a task
+queue.
+
+Explore server-side caching mechanisms for
+optimized performance.
 
