@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+        }
+        footer {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .user-list {
+            margin-top: 20px;
+        }
+        .user-item {
+            background: #fff;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>User Management</h1>
+    </header>
+    <main>
+        <form id="userForm">
+            <h1>Add User</h1>
+            <input type="text" id="name" name="name" placeholder="Name" required>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <button type="submit">Add User</button>
+        </form>
+        <div class="user-list" id="userList"></div>
+    </main>
+    <footer>
+        <p>&copy; 2024 User Management. All rights reserved.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const userForm = document.getElementById('userForm');
+            const userList = document.getElementById('userList');
+
+            // Fetch and display users
+            const fetchUsers = async () => {
+                const response = await fetch('/api/users');
+                const users = await response.json();
+                userList.innerHTML = '';
+                users.forEach(user => {
+                    const userItem = document.createElement('div');
+                    userItem.classList.add('user-item');
+                    userItem.innerHTML = `
+                        <p>Name: ${user.name}</p>
+                        <p>Email: ${user.email}</p>
+                        <button onclick="deleteUser('${user.id}')">Delete</button>
+                    `;
+                    userList.appendChild(userItem);
+                });
+            };
+
+            // Add new user
+            userForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const id = Date.now().toString();
+                await fetch('/api/users', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id, name, email })
+                });
+                userForm.reset();
+                fetchUsers();
+            });
+
+            // Delete user
+            window.deleteUser = async (id) => {
+                await fetch(`/api/users/${id}`, {
+                    method: 'DELETE'
+                });
+                fetchUsers();
+            };
+
+            // Initial fetch of users
+            fetchUsers();
+        });
+    </script>
+</body>
+</html>
