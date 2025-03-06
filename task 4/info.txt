@@ -1,1 +1,15 @@
+Task 4: Complex Form Validation
+and Dynamic DOM Manipulation
+Objective: Extend form validation and
+implement dynamic updates to the DOM.
 
+Steps:
+
+Enhance form validation to include more
+complex rules (e.g., password strength).
+
+Dynamically update the DOM based on
+user interactions using JavaScript.
+
+Implement client-side routing for a
+smoother user experience
