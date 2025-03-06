@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Form Submission</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        nav {
+            
+            padding: 10px 20px; 
+            display: flex;
+            justify-content: center; 
+            gap: 20px; 
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none; 
+            font-size: 18px;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 5px; 
+            transition: background-color 0.3s ease;
+        }
+        
+        
+        main {
+            padding: 20px;
+        }
+        footer {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .fade-in {
+            opacity: 0;
+            transition: opacity 1s;
+        }
+        .fade-in.visible {
+            opacity: 1;
+        }
+        .password-strength {
+            font-weight: bold;
+            color: #ff0000;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const message = document.getElementById('message').value;
+            
+            if (!name || !email || !password || !message) {
+                alert('All fields are required!');
+                return false;
+            }
+            if (!email.includes('@')) {
+                alert('Please enter a valid email address!');
+                return false;
+            }
+            if (password.length < 8 || !/\d/.test(password) || !/[A-Z]/.test(password)) {
+                alert('Password must be at least 8 characters long and include at least one number and one uppercase letter.');
+                return false;
+            }
+            return true;
+        }
+
+        function updatePasswordStrength() {
+            const password = document.getElementById('password').value;
+            const strengthText = document.getElementById('password-strength-text');
+            if (password.length < 8) {
+                strengthText.textContent = 'Weak';
+                strengthText.style.color = 'red';
+            } else if (!/\d/.test(password) || !/[A-Z]/.test(password)) {
+                strengthText.textContent = 'Moderate';
+                strengthText.style.color = 'orange';
+            } else {
+                strengthText.textContent = 'Strong';
+                strengthText.style.color = 'green';
+            }
+        }
+
+        function loadPage(page) {
+            const main = document.querySelector('main');
+            fetch(page)
+                .then(response => response.text())
+                .then(data => {
+                    main.innerHTML = data;
+                });
+        }
+
+        window.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelector('form').classList.add('visible');
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    loadPage(event.target.getAttribute('href'));
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Form Submission Page</h1>
+        <nav>
+            <a href="form.html">Form</a>
+            <a href="about.html">About</a>
+        </nav>
+    </header>
+    <main>
+        <form action="/submit" method="POST" onsubmit="return validateForm()" class="fade-in">
+            <h1>Submit Your Information</h1>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required onkeyup="updatePasswordStrength()">
+            <span id="password-strength-text" class="password-strength"></span>
+            <br>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 Form Submission Page. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
