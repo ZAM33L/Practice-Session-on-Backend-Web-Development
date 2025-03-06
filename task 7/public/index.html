@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase OAuth & Weather App</title>
+</head>
+<body>
+
+    <h1 id="welcomeMessage">Please log in</h1>
+    <button id="googleLogin">Login with Google</button>
+    <button id="logout" >Logout</button>
+
+    <input type="text" id="city" placeholder="Enter city">
+    <button id="getWeather">Get Weather</button>
+    <p id="weatherResult"></p>
+
+    <!-- Include Firebase Config and Scripts -->
+    <script type="module" src="./firebaseConfig.js"></script>
+    <script type="module" src="./script.js"></script>
+
+</body>
+</html>
+
