@@ -215,8 +215,5 @@ This project demonstrates a full-stack development process, integrating frontend
 
 ---
 
-## **Author**
 
-👨‍💻 Developed by: **[Your Name]**\
-📧 Contact: [**your.email@example.com**](mailto\:your.email@example.com)
 
