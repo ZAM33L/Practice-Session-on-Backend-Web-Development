@@ -22,6 +22,10 @@ This project consists of multiple tasks that progressively build a robust full-s
 
 
 
+https://github.com/user-attachments/assets/b3032e2a-2400-4060-b9e1-e2536f69c3a7
+
+
+
 ---
 
 ## **Task 2: Frontend with API Integration**
