@@ -20,7 +20,7 @@ This project consists of multiple tasks that progressively build a robust full-s
 - Basic HTML structure with styling.
 - Interactive JavaScript elements.
 
-[Click here to watch demo video](task 1/l1bt1.mp4)
+
 
 ---
 
